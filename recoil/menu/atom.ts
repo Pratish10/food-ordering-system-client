@@ -32,12 +32,14 @@ interface CategoryResponse {
   responseData: CategoryItem[]
 }
 
+const adminEndpoint = 'https://food-ordering-system-admin.vercel.app'
+
 export const getAllMenus = atom({
   key: 'allMenusAtom',
   default: selector({
     key: 'allMenus/default',
     get: async () => {
-      const response = await axios.get('http://localhost:3000/api/menu')
+      const response = await axios.get(`${adminEndpoint}/api/menu`)
       return response.data as MenuResponse
     }
   })
@@ -48,7 +50,7 @@ export const getAllCategories = atom({
   default: selector({
     key: 'allCategories/default',
     get: async () => {
-      const response = await axios.get('http://localhost:3000/api/getCategories')
+      const response = await axios.get(`${adminEndpoint}/api/getCategories`)
       return response.data as CategoryResponse
     }
   })
@@ -59,7 +61,7 @@ export const getMenuByCategory = atomFamily({
   default: selectorFamily({
     key: 'menuByCategory/default',
     get: category => async () => {
-      const response = await axios.get(`http://localhost:3000/api/menu?category=${category as string}`)
+      const response = await axios.get(`${adminEndpoint}/api/menu?category=${category as string}`)
       return response.data as MenuResponse
     }
   })
@@ -70,7 +72,7 @@ export const getFeaturedMenus = atom({
   default: selector({
     key: 'featuredMenus/default',
     get: async () => {
-      const response = await axios.get('http://localhost:3000/api/getFeaturedMenus')
+      const response = await axios.get(`${adminEndpoint}/api/getFeaturedMenus`)
       return response.data as MenuResponse
     }
   })
@@ -81,7 +83,7 @@ export const getMenuById = atomFamily({
   default: selectorFamily({
     key: 'menuById/default',
     get: id => async () => {
-      const response = await axios.get(`http://localhost:3000/api/menu/${id as string}`)
+      const response = await axios.get(`${adminEndpoint}/api/menu/${id as string}`)
       return response.data as MenuItem
     }
   })
