@@ -1,7 +1,10 @@
+import CategoriesBar from '@/components/CategoriesBar'
 import React from 'react'
 
 export default function Home (): JSX.Element {
   return (
-    <React.Fragment>Client</React.Fragment>
+    <div className='container'>
+      <CategoriesBar />
+    </div>
   )
 }

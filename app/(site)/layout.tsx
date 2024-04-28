@@ -1,25 +1,11 @@
 import { Header } from '@/components/Header'
 import React from 'react'
-import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup
-} from '@/components/ui/resizable'
 
-const layout = ({
-  children
-}: Readonly<{
-  children: React.ReactNode
-}>): JSX.Element => {
+const layout = ({ children }: { children: React.ReactNode }): JSX.Element => {
   return (
-    <div>
-      <ResizablePanelGroup direction="vertical">
-        <ResizablePanel>
-          <Header />
-        </ResizablePanel>
-        <ResizableHandle />
-        <ResizablePanel>{children}</ResizablePanel>
-      </ResizablePanelGroup>
+    <div className='bg-slate-100 h-full'>
+      <Header />
+      {children}
     </div>
   )
 }

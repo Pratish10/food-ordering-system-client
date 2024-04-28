@@ -20,7 +20,11 @@ interface MenuResponse {
 }
 
 interface CategoryItem {
+  id: string
   category: string
+  createdAt: string
+  updatedAt: string
+  userId: string
 }
 
 interface CategoryResponse {

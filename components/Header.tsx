@@ -36,7 +36,7 @@ export const Header = (): React.JSX.Element => {
   }, [])
 
   return (
-    <nav className="flex items-center bg-orange-300 fixed h-16 w-full">
+    <nav className="flex items-center bg-orange-300 h-16 w-full">
       <div className="flex justify-start items-center flex-grow space-x-4 px-3 ml-4">
         <Sheet>
           <SheetTrigger>
