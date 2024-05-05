@@ -1,5 +1,6 @@
 import { atom, atomFamily, selector, selectorFamily } from 'recoil'
 import axios from 'axios'
+import { getAdminEndpoint } from '@/lib/getAdminEndpoint'
 
 export interface MenuItem {
   id: string
@@ -32,7 +33,7 @@ interface CategoryResponse {
   responseData: CategoryItem[]
 }
 
-const adminEndpoint = 'https://food-ordering-system-admin.vercel.app'
+const adminEndpoint = getAdminEndpoint()
 
 export const getAllMenus = atom({
   key: 'allMenusAtom',
