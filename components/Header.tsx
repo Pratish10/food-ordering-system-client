@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import { AlignLeft, Search } from 'lucide-react'
+import { AlignLeft, Search, ShoppingCart } from 'lucide-react'
 
 import {
   Sheet,
@@ -14,11 +14,14 @@ import { Nav } from '@/components/SideBar/Nav'
 import { sideBarLinks } from '@/Constants'
 import { Button } from './ui/button'
 import { SearchBox } from './SearchBox'
+import { useRouter } from 'next/navigation'
 
 export const Header = (): React.JSX.Element => {
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false)
   const [expandedDropdowns, setExpandedDropdowns] = useState<string[]>([])
   const [open, setOpen] = useState(false)
+
+  const router = useRouter()
 
   const toggleSearchBox = (): void => {
     setOpen((open) => !open)
@@ -60,6 +63,9 @@ export const Header = (): React.JSX.Element => {
         <div className="">logo</div>
       </div>
       <div className="flex justify-center mr-4">
+        <Button className='rounded-full hover:bg-orange-400' size='icon' onClick={() => { router.push('/cart') }}>
+          <ShoppingCart />
+        </Button>
         <Button className='rounded-full hover:bg-orange-400' size='icon' onClick={toggleSearchBox}>
           <Search />
         </Button>

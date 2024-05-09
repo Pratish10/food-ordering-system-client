@@ -3,5 +3,5 @@ import {
 } from 'lucide-react'
 
 export const sideBarLinks = [
-  { path: '/', label: 'Home', icon: LayoutDashboard, isDropdown: false }
+  { path: '/', label: 'Digital Menu', icon: LayoutDashboard, isDropdown: false }
 ]
