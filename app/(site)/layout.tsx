@@ -3,7 +3,7 @@ import React from 'react'
 
 const layout = ({ children }: { children: React.ReactNode }): JSX.Element => {
   return (
-    <div className='bg-slate-100 h-full'>
+    <div>
       <Header />
       {children}
     </div>

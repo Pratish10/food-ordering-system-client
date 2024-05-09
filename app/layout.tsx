@@ -17,7 +17,7 @@ export default function RootLayout ({
 }>): JSX.Element {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} bg-slate-100 h-full`}>
         <RecoilProvider>{children}</RecoilProvider>
       </body>
     </html>

@@ -2,11 +2,16 @@
 import { getAllCategories } from '@/recoil/menu/atom'
 import Link from 'next/link'
 import { useRecoilValueLoadable } from 'recoil'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/css'
 import { useMediaQuery } from 'usehooks-ts'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
+} from '@/components/ui/carousel'
 
-const CategoriesBar = (): JSX.Element => {
+export const CategoriesBar = (): JSX.Element => {
   const categories = useRecoilValueLoadable(getAllCategories)
   const isDesktop = useMediaQuery('(min-width: 1229px)')
 
@@ -20,7 +25,7 @@ const CategoriesBar = (): JSX.Element => {
 
   if (isDesktop) {
     return (
-      <div className="container bg-white h-auto my-2 py-6">
+      <div className="container bg-white h-auto my-5 py-6">
         <ul className="flex items-center justify-center space-x-14">
           {categories.state === 'hasValue' &&
             categories.contents.responseData.map((category) => (
@@ -29,7 +34,7 @@ const CategoriesBar = (): JSX.Element => {
                 href={`/menus?category=${category.category}`}
                 className="hover:underline"
               >
-                <li>{category.category}</li>
+                <li className='font-semibold'>{category.category}</li>
               </Link>
             ))}
         </ul>
@@ -38,24 +43,29 @@ const CategoriesBar = (): JSX.Element => {
   }
 
   return (
-    <div className="container bg-white h-auto my-2 py-6">
-      <Swiper spaceBetween={30} slidesPerView={3}>
-        <ul className="flex items-center justify-center space-x-14">
-          {categories.state === 'hasValue' &&
-            categories.contents.responseData.map((category) => (
-              <SwiperSlide key={category.id}>
-                <Link
-                  href={`/menus?category=${category.category}`}
-                  className="hover:underline"
+    <div className="container bg-white h-auto my-5 py-6">
+      <div className="flex items-center justify-center">
+        <Carousel className="w-full max-w-sm">
+          <CarouselContent className="-ml-1">
+            {categories.state === 'hasValue' &&
+              categories.contents.responseData.map((category) => (
+                <CarouselItem
+                  key={category.id}
+                  className="pl-1 md:basis-1/2 lg:basis-1/3"
                 >
-                  <li>{category.category}</li>
-                </Link>
-              </SwiperSlide>
-            ))}
-        </ul>
-      </Swiper>
+                  <Link
+                    href={`/menus?category=${category.category}`}
+                    className="hover:underline ml-20"
+                  >
+                    {category.category}
+                  </Link>
+                </CarouselItem>
+              ))}
+          </CarouselContent>
+          <CarouselPrevious className="bg-slate-200 hover:bg-slate-200 mx-7" />
+          <CarouselNext className="bg-slate-200 hover:bg-slate-200 mx-7" />
+        </Carousel>
+      </div>
     </div>
   )
 }
-
-export default CategoriesBar
