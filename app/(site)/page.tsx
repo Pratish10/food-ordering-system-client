@@ -5,7 +5,7 @@ import React from 'react'
 
 export default function Home (): JSX.Element {
   return (
-    <div className='container'>
+    <div>
       <CategoriesBar />
       <Featured />
       <Menus />

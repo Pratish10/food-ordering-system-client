@@ -13,6 +13,7 @@ export interface MenuItem {
   createdAt: string
   updatedAt: string
   isFeatured: boolean
+  quantity: string | number
 }
 
 interface MenuResponse {
