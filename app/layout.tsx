@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import RecoilProvider from '@/app/Provider'
+import { Suspense } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,7 +19,12 @@ export default function RootLayout ({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-slate-100 h-full`}>
-        <RecoilProvider>{children}</RecoilProvider>
+        <RecoilProvider>
+          <Suspense>
+
+          {children}
+          </Suspense>
+          </RecoilProvider>
       </body>
     </html>
   )
