@@ -10,6 +10,7 @@ import {
   CarouselNext,
   CarouselPrevious
 } from '@/components/ui/carousel'
+import { ClipLoader } from 'react-spinners'
 
 export const CategoriesBar = (): JSX.Element => {
   const categories = useRecoilValueLoadable(getAllCategories)
@@ -17,8 +18,8 @@ export const CategoriesBar = (): JSX.Element => {
 
   if (categories.state === 'loading') {
     return (
-      <div className="flex items-center justify-center container h-auto bg-white mt-2 py-6">
-        loading...
+      <div className="flex items-center justify-center bg-white container h-auto my-5 py-6">
+        <ClipLoader color="#fa822e" />
       </div>
     )
   }
@@ -31,7 +32,7 @@ export const CategoriesBar = (): JSX.Element => {
             categories.contents.responseData.map((category) => (
               <Link
                 key={category.id}
-                href={`/menus?category=${category.category}`}
+                href={`/menu?category=${category.category}`}
                 className="hover:underline"
               >
                 <li className='font-semibold'>{category.category}</li>
@@ -54,8 +55,8 @@ export const CategoriesBar = (): JSX.Element => {
                   className="pl-1 md:basis-1/2 lg:basis-1/3"
                 >
                   <Link
-                    href={`/menus?category=${category.category}`}
-                    className="hover:underline ml-20"
+                    href={`/menu?category=${category.category}`}
+                    className="hover:underline ml-20 font-semibold"
                   >
                     {category.category}
                   </Link>

@@ -1,7 +1,7 @@
 'use client'
-import { getFeaturedMenus } from '@/recoil/menu/atom'
+import { getFeaturedMenus, type MenuItem } from '@/recoil/menu/atom'
 import React from 'react'
-import { useRecoilValueLoadable } from 'recoil'
+import { useRecoilValueLoadable, useSetRecoilState } from 'recoil'
 import {
   Carousel,
   CarouselContent,
@@ -12,14 +12,36 @@ import {
 import { Card } from '@/components/ui/card'
 import Image from 'next/image'
 import { Button } from './ui/button'
+import { cart } from '@/recoil/cart/atom'
+import { ClipLoader } from 'react-spinners'
 
 export const Featured = (): React.JSX.Element => {
   const featuredMenus = useRecoilValueLoadable(getFeaturedMenus)
+  const setCartValue = useSetRecoilState(cart)
+
+  const addMenuToCart = (menu: MenuItem): void => {
+    setCartValue((prevValue) => {
+      const currentCart = Array.isArray(prevValue) ? prevValue : []
+      const existingItem = currentCart.findIndex(item => item.id === menu.id)
+
+      if (existingItem !== -1) {
+        const updatedCart = [...prevValue]
+        updatedCart[existingItem] = {
+          ...updatedCart[existingItem],
+          quantity: Number(updatedCart[existingItem].quantity) + 1,
+          amount: (Number(menu.amount) * (Number(updatedCart[existingItem].quantity) + 1)).toFixed(2)
+        }
+        return updatedCart
+      } else {
+        return [...prevValue, { ...menu, quantity: 1 }]
+      }
+    })
+  }
 
   if (featuredMenus.state === 'loading') {
     return (
-      <div className="flex items-center justify-center container h-auto bg-white mt-2 py-6">
-        loading...
+      <div className="flex items-center justify-center bg-white container h-auto my-5 py-6">
+        <ClipLoader color="#fa822e" />
       </div>
     )
   }
@@ -59,7 +81,15 @@ export const Featured = (): React.JSX.Element => {
                           {menu.description}
                         </p>
                       </div>
-                      <Button size="sm" className='bg-orange-400 text-white hover:bg-orange-500'>Add Item</Button>
+                      <Button
+                        size="sm"
+                        className="w-full px-4 py-2 rounded-xl bg-orange-400 text-white text-xs font-bold hover:bg-orange-400"
+                        onClick={() => {
+                          addMenuToCart(menu)
+                        }}
+                      >
+                        Add Item
+                      </Button>
                     </div>
                   </Card>
                 </div>
