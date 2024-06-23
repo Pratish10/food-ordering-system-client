@@ -20,11 +20,8 @@ export default function RootLayout ({
     <html lang="en">
       <body className={`${inter.className} bg-slate-100 h-full`}>
         <RecoilProvider>
-          <Suspense>
-
-          {children}
-          </Suspense>
-          </RecoilProvider>
+          <Suspense>{children}</Suspense>
+        </RecoilProvider>
       </body>
     </html>
   )

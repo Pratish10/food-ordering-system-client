@@ -5,6 +5,7 @@ export const cart = atom<MenuItem[]>({
   key: 'foodCart',
   default: []
 })
+
 export const notification = atom({
   key: 'cartNotification',
   default: false
